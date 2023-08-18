@@ -1,0 +1,40 @@
+class GroceryItemOrder:
+    def __init__(self, item_name, quantity, price_per_unit):
+        self.item_name = item_name
+        self.quantity = quantity
+        self.price_per_unit = price_per_unit
+
+    def get_cost(self):
+        return self.quantity * self.price_per_unit
+
+    def __str__(self):
+        return f"{self.quantity} {self.item_name} @ ${self.price_per_unit:.2f} each"
+
+class GroceryList:
+    def __init__(self):
+        self.items = []
+        self.size = 0
+
+    def add_item(self, item_order):
+        self.items.append(item_order)
+        self.size += 1
+
+    def get_total_cost(self):
+        total_cost = sum(item.get_cost() for item in self.items)
+        return total_cost
+
+    def __str__(self):
+        return "\n".join(str(item) for item in self.items)
+
+cookies_order = GroceryItemOrder("boxes of cookies", 4, 2.50)
+apples_order = GroceryItemOrder("apples", 10, 0.50)
+bread_order = GroceryItemOrder("loaves of bread", 2, 1.75)
+
+grocery_list = GroceryList()
+grocery_list.add_item(cookies_order)
+grocery_list.add_item(apples_order)
+grocery_list.add_item(bread_order)
+
+print("Grocery List:")
+print(grocery_list)
+print("\nTotal Cost: $" + str(grocery_list.get_total_cost()))

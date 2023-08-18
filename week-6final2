@@ -1,0 +1,22 @@
+def flip_lines(input_file, output_file):
+    with open(input_file, 'r') as f_input, open(output_file, 'w') as f_output:
+        lines = f_input.readlines()
+        i = 0
+        while i < len(lines):
+            if i + 1 < len(lines):
+                f_output.write(lines[i + 1].strip() + ";\n")
+                f_output.write(lines[i].strip() + '\n')
+            i += 2
+
+input_text = """Twas the night before Christmas, when all through the house
+Not a creature was stirring, not even a mouse
+The stockings were hung by the chimney with care
+In hopes that St. Nicholas soon would be there"""
+
+input_filename = 'input.txt'
+with open(input_filename, 'w') as f_input:
+    f_input.write(input_text)
+
+output_filename = 'output.txt'
+flip_lines(input_filename, output_filename)
+print("Lines flipped and written to", output_filename)
